@@ -1,0 +1,9 @@
+bibentry(
+  bibtype  = "techreport",
+  title    = "raichepackage: Courte description",
+  author  = "Gilles Raiche,",
+  institution  = "Universite du Quebec a Montreal, Departement d'éducation et pedagogie",
+  adress  = "Montreal, Canada",
+  year     = "2025",
+  url  = "https://www.cdame2.uqam.ca/RECHERCHE/COMMUNICATIONS/2008/SCEE/",
+)

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Gilles Raiche" />
+
+
+<title>Template_html_Rmd</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+<style type="text/css">detaiks.chunk-details > summary.chunk-summary {
+text-align: right;
+}
+details.chunk-details[open] > summary.chunk-summary::after {
+content: "Hide";
+}
+details.chunk-details[open] > summary.chunk-summary > span.chunk-summary-text {
+display: none;
+}
+</style>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">
+
+div.csl-bib-body { }
+div.csl-entry {
+clear: both;
+margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+margin-left:2em;
+text-indent:-2em;
+}
+div.csl-left-margin {
+min-width:2em;
+float:left;
+}
+div.csl-right-inline {
+margin-left:2em;
+padding-left:1em;
+}
+div.csl-indent {
+margin-left: 2em;
+}
+</style>
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Template_html_Rmd</h1>
+<h4 class="author">Gilles Raiche</h4>
+<h4 class="date">24 mars 2025</h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction" id="toc-introduction"><span class="toc-section-number">1</span> Introduction</a></li>
+<li><a href="#installation-de-la-librairie" id="toc-installation-de-la-librairie"><span class="toc-section-number">2</span> Installation de la
+librairie</a></li>
+<li><a href="#traitement-des-références" id="toc-traitement-des-références"><span class="toc-section-number">3</span> Traitement des références</a></li>
+<li><a href="#équations" id="toc-équations"><span class="toc-section-number">4</span> Équations</a></li>
+<li><a href="#traitement-des-tableaux" id="toc-traitement-des-tableaux"><span class="toc-section-number">5</span> Traitement des tableaux</a></li>
+<li><a href="#traitement-des-figures" id="toc-traitement-des-figures"><span class="toc-section-number">6</span> Traitement des figures</a></li>
+<li><a href="#références-croisées" id="toc-références-croisées"><span class="toc-section-number">7</span> Références croisées</a></li>
+<li><a href="#théorèmes-et" id="toc-théorèmes-et"><span class="toc-section-number">8</span> Théorèmes et …</a></li>
+<li><a href="#références" id="toc-références">Références</a></li>
+</ul>
+</div>
+
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(raichepackage)</span></code></pre></div>
+</details>
+<div id="introduction" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Introduction</h1>
+</div>
+<div id="installation-de-la-librairie" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Installation de la
+librairie</h1>
+</div>
+<div id="traitement-des-références" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Traitement des
+références</h1>
+<p>[<span class="citation">Akossi (<a href="#ref-Akossi2019a">2019</a>)</span>]<span class="citation">(<a href="#ref-knitr2014">Xie, 2014</a>)</span></p>
+</div>
+<div id="équations" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Équations</h1>
+</div>
+<div id="traitement-des-tableaux" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Traitement des
+tableaux</h1>
+</div>
+<div id="traitement-des-figures" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Traitement des
+figures</h1>
+<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a> x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a> density <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a> <span class="fu">plot</span>(x, density)</span></code></pre></div>
+</details>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="références-croisées" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Références
+croisées</h1>
+</div>
+<div id="théorèmes-et" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Théorèmes et …</h1>
+</div>
+<div id="références" class="section level1 unnumbered">
+<h1 class="unnumbered">Références</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0" line-spacing="2">
+<div id="ref-Akossi2019a" class="csl-entry">
+Akossi, A. (2019). <em>Comparison of various discretization algorithms
+for stable</em> [thesis, Georgia State University]. <a href="https://scholarworks.gsu.edu/cgi/viewcontent.cgi?article=1067&amp;context=math_diss">https://scholarworks.gsu.edu/cgi/viewcontent.cgi?article=1067&amp;context=math_diss</a>
+</div>
+<div id="ref-knitr2014" class="csl-entry">
+Xie, Y. (2014). knitr: A Comprehensive Tool for Reproducible Research in
+<span>R</span>. Dans V. Stodden, F. Leisch et R. D. Peng (dir.),
+<em>Implementing Reproducible Computational Research</em>. Chapman;
+Hall/CRC.
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

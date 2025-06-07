@@ -1,0 +1,27 @@
+Package: raichepackage
+Type: Package
+Title: Utilities for package development
+Version: 1.0.0
+Authors@R: c(
+    person(
+      "Gilles", "Raîche",
+      email = "raiche.gilles@uqam.ca",
+      role = c("aut", "cre")
+    )
+  )
+Description: More about what it does (maybe more than one line).
+    Continuation lines should be indented.
+Roxygen: list(markdown = TRUE)
+License: GPL-3
+Encoding: UTF-8
+Language: en-US
+RoxygenNote: 7.3.2
+Imports: devtools, fs, gert, pathr, pkgsearch, rbibutils, renv,
+        rstudioapi, stringr, usethis, utils
+Suggests: BiocStyle, bookdown, knitr, kableExtra, raicheutils,
+        rmarkdown, R.utils
+VignetteBuilder: knitr
+NeedsCompilation: no
+Packaged: 2025-06-07 20:24:19 UTC; raich
+Author: Gilles Raîche [aut, cre]
+Maintainer: Gilles Raîche <raiche.gilles@uqam.ca>

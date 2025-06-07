@@ -1,0 +1,69 @@
+---
+title: "Template_html_Rmd"
+author: "Gilles Raiche"
+date: "`r format(Sys.Date(),'%d %B %Y')`"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    number_sections: true
+    decimal.mark: ','
+    code_folding: hide
+    df_print: kable
+bibliography:
+- packages.bib
+- references.bib
+link-citations: true
+csl: "apa7-fr-couture.csl"
+vignette: >
+  %\\VignetteIndexEntry{Template_html_Rmd} 
+  %\\VignetteEncoding{UTF-8}  
+  %\\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+suggests <- c(
+    "knitr",
+    "rmarkdown",
+    "R.utils")
+
+librairies <- c(.packages(), suggests)
+knitr::write_bib(librairies, "packages.bib")
+```
+
+```{r setup, eval=FALSE}
+library(raichepackage)
+```
+
+# Introduction
+
+# Installation de la librairie
+
+# Traitement des références
+
+[@Akossi2019a][@knitr2014]
+
+# Équations
+
+# Traitement des tableaux
+
+# Traitement des figures
+
+```{r, plot1, opts.label="Exemple de figure"}
+ x <- rnorm(10)
+ density <- dnorm(x)
+ plot(x, density)
+```
+
+# Références croisées
+
+# Théorèmes et ...
+
+
+# Références

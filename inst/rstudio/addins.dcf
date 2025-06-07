@@ -1,0 +1,17 @@
+Name: Rd equation
+Description: Insert an equation to a Rd help file at the cursor position.
+Binding: addRdEquation
+Interactive: false
+
+Name: Rd equation with line return
+Description: Insert an equation to a Rd help file at the cursor position with line return.
+Binding: addRdEquation_withLine
+Interactive: false
+
+
+
+Name: New Addin Name
+Description: New Addin Description
+Binding: new_addin
+Interactive: false
+

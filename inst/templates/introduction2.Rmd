@@ -1,0 +1,294 @@
+---
+title: "Introduction2"
+author: "Gilles Raiche"
+date: "`r format(Sys.Date(),'%d %B %Y')`"
+output:
+  bookdown::html_document2:
+    base_format: rmarkdown::html_vignette
+    toc: true
+    number_sections: true
+    decimal.mark: ','
+    code_folding: hide
+    df_print: kable
+bibliography:
+- packages.bib
+- references.bib
+link-citations: true
+csl: "apa7-fr-couture.csl"
+vignette: >
+   %\\VignetteIndexEntry{Introduction2} 
+   %\\VignetteEngine{knitr::rmarkdown}
+   %\\VignetteEncoding{UTF-8}\n
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+imports <- c( 
+    "devtools",
+    "fs",
+    "gert",
+    "pathr",
+    "pkgsearch",
+    "rbibutils",
+    "renv",
+    "rstudioapi",
+    "usethis",
+    "utils")
+
+suggests <- c(
+    "knitr",
+    "rmarkdown",
+    "R.utils")
+
+librairies <- c(.packages(), imports, suggests)
+knitr::write_bib(librairies, "packages.bib")
+```
+
+```{r setup, eval=FALSE}
+library(raichepackage)
+```
+
+# Installation d'une librairie étape par étape
+
+Les procédures de création d'une librairie R décrites ci-bas doivent exclusivement être réalisées dans l'environnement Rstudio. Elles utilisent les fonctionnalités de création de projet, dont celui d'une librairie, que Rsudio offrent.
+
+# Pour installer localement la librairie
+
+## Création d'un projet de librairie sous Rstudio
+
+Les réferences générales à `R` et `Rstudio` sont publiquement disponibles [@R-base].
+
+La première étape consiste à se lancer la séquence `File`-`New Project`-`New Directory`-`R Package`: voir figure \@ref(fig:test). A mon avis il est préférable de toujours utiliser le même répertoire pour emmagasiner nos librairies en développement: pour moi c'est `PACKAGE`.
+
+
+```{r Rstudio, echo=FALSE, fig.cap="New package project in Rstudio", out.width = '75%'}
+knitr::include_graphics("Rstudio_package_project.gif")
+```
+
+```{r, test, fig.cap="TEST"}
+plot(cars)
+```
+
+Des options s'offrent aussi à vous. La plus utile à mon avis est `Open in new session`, car elle vous permet de continuer à travailler dans votre session R actuelle et de lancer une nouvelle session de R où vous pourrez fignoler votre nouvelle librairie.
+
+L'option `Create a git repository` est principalement utile si vous travaillez dans un environnement de partage de développement de librairie.
+
+L'option `Use renv with this projec`t est utile si vous désirez créer un environnement vierge comme si vous étiez sur un nouvel ordinateur. Vous devez alors réinstaller localement toutes les librairies qui vous sont nécessaires même si elles sont déjà installées sur votre plate forme. Ainsi, vous pouvez travailler sur un environnement vierge et même avec différentes versions de R. Le désaventage de cette approche est cependant que cela nécessite plus d'espace mémoire sur votre disque dur.
+
+## Utilisation des fonctions disponibles dans la librarie raichepackage
+
+La seconde étape consiste à installer la librairie `raichepackage` et de lancer la fonction pack_initialisation. Installer la librairie `raichepackage` permet aussi que les options déclarées dans `.onLoad()` soient effectives.
+
+Divers répertoires et fichiers seront créés et certaines informations seron insérées dans ces fichiers. Par exemple si on désire créer une librairie du nom de vraisemblance on lancera la commande suivante. En mettant en subrillance le nom de cette fonction vous pourrez obtenir l'écran d'aide associé en actionnant `F1` et l'entièreté du code source en actionnant `F2`. Vous pourrez ainsi inspecter en détail les opérations effectuées par cette fonction. L'utilisation des touches `F1` et `F2` est valide pour toutes fonctions.
+
+```{r, eval=FALSE}
+pack_initialisation("vraisemblance")
+```
+
+Plus spécifiquement les librairies nécessaires (*imports*) déclarées dans le fichier `DESCRIPTION` seront déclarées, le moteur de production de documentation Roxygen sera déclaré ainsi que sa version tout comme la lience sous laquelle sera créé la librairie . Vous devrez remplir vous mêmes les autres informations.
+
+Un modèle de citation sera aussi ajouté dans un fichier `CITATION` que vous pourrez modifier selon vos besoins. Il en est de même d'un fichier `addins.dcf` situé dans le répertoire `inst/rstudio`.
+
+News et Readme (logo) reste yaml pour les vignettes et le répertoire des vignettes.
+
+# Développement de librairies
+
+À consulter: [@wickham2023]
+
+# Lien à des fichiers locaux
+
+```{r, eval=TRUE, echo=TRUE}
+print(file.exists("RAICHE_SCEE_2008.pps"))
+dir()
+```
+
+Les liens à des fichiers locaux `file://...` ne fonctionnent pas dans le viewer (idem dans l'écran `Help`), mais seulement dans un navigateur: cela est valide aussi bien ici pour les liens dans le texte que dans la liste des références. Il faut aussi s'assurer d'avoir le lien absolu et non pas seulement relatif. La fonction `R.utils::toUrl("")` permet d'obtenir ce lien de manière sécuritaire ([inspiré indirectement par du code sur cette page web](https://stackoverflow.com/questions/62893323/a-link-to-local-html-file-in-r-vignette)).
+
+-   [link 1](%60r%20R.utils::toUrl(%22../inst/divers/RAICHE_SCEE_2008.pps%22)%60)
+
+-   [link 2](%60r%20R.utils::toUrl(%22logo.png%22)%60)
+
+-   [@raiche2008; @raiche2008bis]
+
+# Étapes préliminaires
+
+1.  Sous Rstudio: [F]{.underline}ile - [N]{.underline}ew Project - [P]{.underline}ackage
+
+2.  Utiliser ces fonctions nécessaires ou très utiles
+
+3.  Par défaut celles-ci sont effectuées par `pack_initialisation()`.
+
+4.  Pour vérifier le répertoire où est installé la librairie et cherche un répertoire spécifique effectuer:
+
+```{r, eval=FALSE}
+path <- find.package("raichepackage")
+path
+dir(paste(path, "/divers", sep=""))
+```
+
+```{r, eval=FALSE}
+# NÉCESSAIRE OU TRÈS UTILE
+devtools::load_all(".") # Charge les fonctions disponibles
+devtools::document() # Transforme le code Roxygen2 en Rmd et crée les fichiers
+devtools::has_devel(debug=TRUE) # Vérifie si l'environnment est OK
+pkgbuild::check_build_tools(debug=TRUE) # Idem
+usethis::use_description() # Crée ou modifie DESCRIPTION
+usethis::use_author() # Add an author to the 'Authors@R' field in DESCRIPTION
+usethis::use_citation() # Create a CITATION template
+usethis::use_addin() # Add minimal RStudio Addin binding
+usethis::use_gpl3_license() # Add to DESCRIPTION 
+usethis::use_vignette() # Create a vignette or article (and other dir or files)
+usethis::use_roxygen_md() # Use roxygen2 with markdown (add to DESCRIPTION)
+```
+
+-   Au besoin, utiliser ces fonctions:
+
+```{r, eval=FALSE}
+# OPTIONNEL
+usethis::use_news_md() # Create a simple NEWS.md
+usethis::use_readme_rmd() # Creates skeleton README files 
+devtools::build_readme() # Devrait suivre pour mise à jour
+usethis::use_data() # Create package data
+usethis::use_data_raw() # Similaire
+usethis::use_logo("logo.png") # Use a package logo in man/figures/logo.png (add also markdown to README)
+
+usethis::use_pipe() # À analyser
+usethis::use_rstudio() # À analyser  rarement utile
+usethis::use_rstudio_preferences() # Très rarement utile
+usethis::use_rmarkdown_template() # Add an RMarkdown Template
+usethis::use_template() # Use a usethis-style template
+```
+
+Il peut être utile de modifier les options par défaut des librairies `usethis` et `devtools`. Par exemple pour utiliser des informations personnelles par défaut dans le développement de librairies ou pour les fichiers markdown.
+
+```{r, eval=FALSE}
+edit_r_profile("project")
+edit_rstudio_snippets() # opens RStudio's snippet config for the given type
+```
+
+```{r, eval=FALSE}
+# devtools::build_vignettes() Crée une vignette dans le répertoire doc/
+devtools::load_all()
+
+vignette() # Liste de toutes les vignettes pour toutes les librairies
+browseVignettes() # Idem au format HTML (plus utile)
+tools::getVignetteInfo("raicheutils")
+devtools::build_manual() # Dans le répertoire du projet
+utils::data() # Liste de tous les data des librairies
+temp <- system.file(package="raichepackage") # Répertoire de la librairie
+getwd()
+fs::path_home() # Ex. C:/Users/raich # 
+path.expand("~") # Ex. "C:/Users/raich/OneDrive/Documents"
+
+fs::dir_tree() # Arborescence de la librairie
+fs::dir_tree(temp) # Arborescence de la librairie
+file_info = fs::file_info(temp)
+names(file_info)
+c(Path=file_info$path, permissions=file_info$permissions)
+cat("\n\npath=", file_info$path, "\n\nPermissions=", as.character(file_info$permissions))
+```
+
+# INFOS {#intro}
+
+```{theorem, label, name="Theorem name"}
+Here is my theorem.
+```
+
+\@ref(thm:label)
+
+Il n'est pas possible d'utiliser htlm_document et pdf_document dans le même fichier.
+
+This is Chapter \@ref(intro)
+
+-   [YAML Fieldguide](https://cran.r-project.org/web/packages/ymlthis/vignettes/yaml-fieldguide.html)
+-   [Convert to an HTML vignette](https://pkgs.rstudio.com/rmarkdown/reference/html_vignette.html)
+
+## R cmd check note
+
+Dans la version 4.4.2 de R, pour éviter de voir apparaître le message `R cmd check note: unable to verify current time` lors de l'opération `CHECK` il faut lancer préalablement la commande suivante dans la console: `Sys.setenv('R_CHECK_SYSTEM_CLOCK' = 0)` . Je ne sais s'il est possible d'inclure cette ligne dans le lancement de CHECK, mais cela fonctionne si on lance préalablement dans la console. Il est aussi possible de rendre permanente la modification de la façon suivante et ainsi de modifier le fichier undefined.
+
+```         
+install.packages("usethis") (If not installed already)
+usethis::edit_r_environ()
+Add _R_CHECK_SYSTEM_CLOCK_=0 to the file
+Save, close file, restart R
+```
+
+[Source de l'information](https://stackoverflow.com/questions/63613301/r-cmd-check-note-unable-to-verify-current-time)
+
+## Date francisée dans YAML
+
+date: '`r format(Sys.Date(), "%B %d, %Y")`' et non plus date: "`r format(Sys.Date(), "%B %d, %Y")`"
+
+[Source de l'information] (<https://stackoverflow.com/questions/23449319/yaml-current-date-in-rmarkdown#>:\~:text=This%20is%20a%20little%20bit%20tricky%2C%20but%20you,so%20Pandoc%20can%20use%20the%20value%20from%20Sys.time%28%29.)
+
+## Problèmes avec les exemples
+
+J'ai du utiliser le code qui suit, car je ne réussis pas à faire compiler la librairie avec des exemples et je dois annuler leur exécution.
+
+\examples{
+\dontrun{
+hello()
+}
+}
+
+## Lecture des lignes du log (mais ferme le fichier après)
+
+readLines('C:/Users/raich/AppData/Local/Temp/Rtmpc7xJfq/file25a022cf46e1/raichepackage.Rcheck/00check.log')
+
+# Création d'une librairie à partir d'unfichier Markdown
+
+[litr 1](https://yihui.org/en/2023/01/litr-package/) [litr 2](https://github.com/jacobbien/litr-project)
+
+```{r, eval=FALSE}
+remotes::install_github("jacobbien/litr-project@*release", subdir = "litr")
+litr::render("create-litr/index.Rmd")
+```
+
+[fusen](https://thinkr-open.github.io/fusen/) [rpl](https://github.com/yihui/rlp) [Litterate programming et MLE](https://yihui.org/rlp/)
+
+<https://yihui.org/rlp/>
+
+# Désinstaller une librairie
+
+```{r, eval=FALSE}
+remove.packages("meteoR")
+```
+
+# Addins, snippets, connexions and shortcuts
+
+# Divers utilitaires
+
+```{r, eval=FALSE}
+dir("./vignettes/") # Un répertoire plus bas
+dir("../") # Un répertoire plus haut
+R.utils::ProgressBar()
+R.utils::readRdHelp("options", format="text")
+R.utils::setOption()
+R.utils::toUrl(getwd()) # Donne l'url d'un fichier ou d'un répertoire
+```
+
+# ANCIEN CODE
+
+```{r, eval=FALSE}
+dir("../") # Mon répertoire de packages
+remotes::install_local("../raichepackage_1.0.0.tar.gz")
+library("raichepackage")
+
+```
+
+# Sites personnels de Zotero, Github et Rstudio cloud
+
+[Github](%22https://gitlab.com/graiche1%22): 'raiche.gilles\@uqam.ca' zjsvz9n8
+
+[Rstudio cloud](%22https://login.posit.cloud/login?redirect=%2Foauth%2Fauthorize%3Fredirect_uri%3Dhttps%253A%252F%252Fposit.cloud%252Flogin%26client_id%3Dposit-cloud%26response_type%3Dcode%26show_auth%3D0&product=cloud%22): 'raiche.gilles\@uqam.ca' Zjsvz9n8\$
+
+[Zotero](%22https://www.zotero.org/user/login/%22): 'raiche.gilles\@uqam.ca' zjsvz9n8
+
+# Références

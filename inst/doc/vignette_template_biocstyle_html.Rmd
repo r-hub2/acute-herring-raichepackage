@@ -1,0 +1,140 @@
+---
+title: "Template_html_Rmd"
+author: 
+  - name: Gilles Raîche
+    affiliation: Université du Québec à Montréal
+    email: raiche.gilles@uqam.ca
+date: "`r format(Sys.Date(),'%d %B %Y')`"
+output:
+  BiocStyle::html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    decimal.mark: ','
+    code_folding: hide
+    df_print: kable
+abstract: |
+  Résumé de de document
+bibliography:
+  - packages.bib
+  - references.bib
+link-citations: true
+csl: "apa7-fr-couture.csl"
+
+vignette: >
+  %\VignetteIndexEntry{Template_html_Rmd}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+suggests <- c(
+    "BiocStyle",
+    "bookdown",
+    "knitr",
+    "rmarkdown",
+    "R.utils")
+
+librairies <- c(.packages(), suggests)
+knitr::write_bib(librairies, "packages.bib")
+```
+
+```{r setup, eval=FALSE}
+library(raichepackage)
+
+if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+BiocManager::install("BiocStyle")
+```
+
+# Introduction {#id}
+
+Ce modèle est basé sur le style BiocStyle de bioconductor [@R-BiocStyle] [^1]
+
+[^1]: Note de marge droite de type bookdown [@R-bookdown]
+
+# Installation de la librairie
+
+# Traitement des références
+
+[@Akossi2019a][@knitr2014]
+
+# Équations (voir équation \@ref(eq:binom))
+
+\begin{equation}
+  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
+  (\#eq:binom)
+\end{equation}
+
+# Traitement des tableaux (voir tableau \@ref(tab:tab1))
+
+```{r tab1, tab.cap="Exemple de tableau"}
+ knitr::kable(
+  head(mtcars[, 1:8], 10), caption = 'A table of the first 10 rows of `mtcars`.'
+)
+```
+
+# Traitement des figures (voir figure \@ref(fig:plot1))
+
+```{r, plot1, fig.cap="Exemple de figure", fig.wide=TRUE}
+ x <- rnorm(10)
+ density <- dnorm(x)
+ plot(x, density)
+```
+
+# Références croisées
+
+Référence à la section \@ref(id) du document
+
+# Théorèmes et ... (voir théorème \@ref(thm:thm1))
+
+::: {#thm1 .theorem name="Pythagorean theorem"}
+This is a `theorem` environment that can contain **any** *Markdown* syntax.
+:::
+
+Pour identifier les intitulés et les préfixes des variantes dans l'environnement bookdown consulter le tableau \@ref(tab:tab2). **Est-ce qu'il est possible de manipuler ces variables pour renommer ou franciser les termes?**
+
+```{r tab2, tab.cap="Environnement des théorèmes"}
+# http://adv-r.had.co.nz/Environments.html#env-basics
+#bookdown:::label_names_math$thm <<- "THEOREME"
+#ls(getNamespace("bookdown"), all.names=FALSE)
+
+knitr::kable(data.frame(
+  Environment = names(bookdown:::theorem_abbr),
+  `Printed Name` = unname(unlist(bookdown:::label_names_math)),
+  `Label Prefix` = unname(bookdown:::theorem_abbr),
+  stringsAsFactors = FALSE, check.names = FALSE
+),booktabs = TRUE)
+```
+
+^[[Modification des libellées](https://stackoverflow.com/questions/48247787/how-to-change-caption-label-names-in-a-single-document-with-bookdown)]
+
+# Liens web externes et locaux
+
+-   [Vignettes Biocstyle](https://www.bioconductor.org/packages/release/bioc/html/BiocStyle.html)
+
+# Informations sur la session
+
+```{r}
+ print(sessionInfo())
+```
+
+# Références
+
+Il est probable que pour une sortie pdf, le code soit différent.
+
+<div id="refs"></div>
+
+# (APPENDIX) Appendices {-}
+
+# Premier appendice
+
+# Second appendice
+
+

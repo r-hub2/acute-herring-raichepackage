@@ -1,0 +1,35 @@
+if (fs::file_exists("renv/activate.R")) source("renv/activate.R")
+
+given <- "Gilles"
+family <- "Raiche,"
+email <-  "raiche.gilles@uqam.ca"
+name <- paste(given, family)
+
+gitVersion <- system("git --version", intern=TRUE)
+options(
+  raichepackage.bibtype = "techreport",
+  raichepackage.gitversion = gitVersion,
+  raichepackage.name = name,
+  raichepackage.email = email,
+  raichepackage.address = "Montreal, Canada",
+  raichepackage.institution = "Universite du Quebec a Montreal, Departement d'education et pedagogie",
+  raichepackage.url = "https://www.cdame2.uqam.ca/RECHERCHE/COMMUNICATIONS/2008/SCEE/",
+  usethis.description = list(
+    "Authors@R" = utils::person(
+      given, family,
+      email = email,
+      role = c("aut", "cre"),
+      comment = c(ORCID = "YOUR-ORCID-ID")
+    ),
+    License = "GPL-3"
+  ),
+  usethis.destdir = "/path/to/folder/", # for use_course(), create_from_github()
+  usethis.protocol = "ssh", # Use ssh git protocol
+  usethis.overwrite = TRUE # overwrite files in Git repos without confirmation
+)
+
+rm("given")
+rm("family")
+rm("email")
+rm("name")
+rm("gitVersion")

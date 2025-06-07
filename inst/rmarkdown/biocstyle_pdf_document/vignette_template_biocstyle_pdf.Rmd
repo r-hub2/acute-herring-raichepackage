@@ -1,0 +1,128 @@
+---
+title: "Template_biocstyle_pdf_Rmd" 
+author:
+- name: Gilles Raîche
+  affiliation: Université du Québec à Montréal
+  email: raiche.gilles@uqam.ca
+date: "`r format(Sys.Date(),'%d %B %Y')`"
+output:
+  BiocStyle::pdf_document
+abstract: |
+  Résumé de de document
+vignette: >
+  %\VignetteIndexEntry{Template_biocstyle_pdf_Rmd} 
+  %\VignetteEncoding{UTF-8}  
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+```{r, echo=FALSE, eval=FALSE}
+suggests <- c(
+    "BiocStyle",
+    "bookdown",
+    "knitr",
+    "rmarkdown",
+    "R.utils")
+
+librairies <- c(.packages(), suggests)
+knitr::write_bib(librairies, "packages.bib")
+if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+BiocManager::install("BiocStyle")
+```
+
+
+```{r setup, echo=FALSE, eval=FALSE}
+library(raichepackage)
+```
+
+
+```{r style, echo = FALSE, eval=FALSE, results = 'asis'}
+# https://bioconductor.org/packages/devel/bioc/vignettes/BiocStyle/inst/doc/AuthoringRmdVignettes.html
+tinytex::tlmgr_install('pdfcrop') # Pour traiter les références croisées des équations
+# https://www.ctan.org/pkg/pdfcrop
+# extra_dependencies: ["Bioconductor", "bibextract", "pdfcrop"]
+BiocStyle::markdown()
+system('pdflatex --version')
+BiocStyle::pkg_ver("BiocStyle")
+BiocStyle::doc_date()
+```
+
+
+# Introduction {#id}
+
+Pour le moment les citations et les notes de bas de page ne fonctionnent pas ainsi que la création de la section des références. Il en est de même avec les références coisées des équations. Tout le reste semble naller correctement.
+
+Il sera aussi probablement nécessaire de retracer des librairies Latex sur [ctan](https://www.ctan.org/).
+
+Ce modèle est basé sur le style BiocStyle de  [bioconductor](https://bookdown.org/yihui/bookdown)
+
+[How to use latex in Rmarkdown](https://everyday.codes/tutorials/how-to-use-latex-in-rmarkdown/)
+
+
+# Installation de la librairie
+
+# Traitement des références
+
+
+
+# Équations 
+
+\begin{equation}
+  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
+  (\#eq:binom)
+\end{equation}
+
+
+
+# Traitement des tableaux (voir tableau \@ref(tab:tab1))
+
+```{r tab1, tab.cap="Exemple de tableau"}
+ knitr::kable(
+  head(mtcars[, 1:8], 10)
+  )
+```
+
+# Traitement des figures (voir figure \@ref(fig:plot1))
+
+```{r, plot1, fig.cap="Exemple de figure", fig.wide=TRUE}
+ x <- rnorm(10)
+ density <- dnorm(x)
+ plot(x, density)
+```
+
+# Références croisées
+
+Référence à la section \@ref(id) du document
+
+# Théorèmes et ... (voir théorème \@ref(thm:thm1))
+
+::: {#thm1 .theorem name="Pythagorean theorem"}
+This is a `theorem` environment that can contain **any** *Markdown* syntax.
+:::
+
+# Liens web externes et locaux
+
+-   [Vignettes Biocstyle](https://www.bioconductor.org/packages/release/bioc/html/BiocStyle.html)
+
+
+# Références
+
+<div id="refs"></div>
+
+# (APPENDIX) Appendix {-}
+
+# Informations sur la session
+
+
+
+```{r}
+ print(sessionInfo())
+```
